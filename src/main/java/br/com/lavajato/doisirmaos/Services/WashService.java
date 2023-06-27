@@ -36,22 +36,33 @@ public class WashService {
         return washRepository.findAll();
     }
 
+    public List<Wash> getAllWashesWasntRetired(Integer carWashId) {
+        CarWash carWash = carWashService.getCarWash(carWashId);
+        return washRepository.findAllByCarWashAndRetiredIsFalse(carWash);
+    }
+
+    public Wash updatePrice(Integer id, WashDto washDto){
+        Wash wash = this.getWash(id);
+        wash.setPrice(washDto.getPrice());
+        return washRepository.save(wash);
+    }
+
     public void deleteWash(Integer id) {
         washRepository.deleteById(id);
     }
 
-    public void payWashSevice(Integer washId){
+    public Wash payWashSevice(Integer washId){
         Wash wash = this.getWash(washId);
         wash.setPay(true);
 
         CarWash carWash = carWashService.getCarWash(wash.getCarWash().getId());
         carWashService.recieveValue(carWash, wash.getPrice());
 
-        washRepository.saveAndFlush(wash);
+       return washRepository.saveAndFlush(wash);
 
     }
 
-    public void retireVehicle(Integer washId){
+    public Wash retireVehicle(Integer washId){
         Wash wash = this.getWash(washId);
 
         if(!wash.isPay()){
@@ -60,7 +71,8 @@ public class WashService {
 
         wash.setRetired(true);
         wash.setFinishTime(LocalDateTime.now());
-        washRepository.saveAndFlush(wash);
+
+        return washRepository.saveAndFlush(wash);
 
     }
 

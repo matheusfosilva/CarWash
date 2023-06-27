@@ -1,15 +1,12 @@
 package br.com.lavajato.doisirmaos.Dto;
 
 import br.com.lavajato.doisirmaos.Domain.User;
-import br.com.lavajato.doisirmaos.Domain.Vehicle;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
 
 @Data
 @Builder
@@ -31,7 +28,6 @@ public class UserDto {
                 .nome(this.getNome())
                 .email(this.getEmail())
                 .phone(this.getPhone())
-                .vehicle(new ArrayList<Vehicle>())
                 .build();
     }
 

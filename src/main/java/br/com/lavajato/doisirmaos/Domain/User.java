@@ -31,8 +31,5 @@ public class User {
     private String nome;
     private String email;
     private String phone;
-    @OneToMany(cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private List<Vehicle> vehicle;
 
 }

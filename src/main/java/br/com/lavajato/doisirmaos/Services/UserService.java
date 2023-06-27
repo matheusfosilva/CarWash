@@ -1,11 +1,9 @@
 package br.com.lavajato.doisirmaos.Services;
 
 import br.com.lavajato.doisirmaos.Domain.User;
-import br.com.lavajato.doisirmaos.Domain.Vehicle;
-import br.com.lavajato.doisirmaos.Repositories.UserRepository;
 import br.com.lavajato.doisirmaos.Dto.UserDto;
 import br.com.lavajato.doisirmaos.Exceptions.ResourceNotFoundException;
-import br.com.lavajato.doisirmaos.Repositories.VehicleRepository;
+import br.com.lavajato.doisirmaos.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

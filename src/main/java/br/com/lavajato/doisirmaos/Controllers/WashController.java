@@ -1,5 +1,6 @@
 package br.com.lavajato.doisirmaos.Controllers;
 
+import br.com.lavajato.doisirmaos.Domain.CarWash;
 import br.com.lavajato.doisirmaos.Domain.Wash;
 import br.com.lavajato.doisirmaos.Dto.WashDto;
 import br.com.lavajato.doisirmaos.Services.WashService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +40,16 @@ public class WashController {
         return new ResponseEntity<>(washService.getAllWashes(), HttpStatus.OK);
     }
 
+    @GetMapping("/not-retired/{carWashId}")
+    public ResponseEntity<List<Wash>> getAllWashesWasntRetired(@PathVariable  Integer carWashId) {
+        return new ResponseEntity<>(washService.getAllWashesWasntRetired(carWashId), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Wash> updatePrice(@PathVariable Integer id, WashDto dto) {
+        return new ResponseEntity<>(washService.updatePrice(id, dto), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteWash(@PathVariable Integer id) {
         washService.deleteWash(id);
@@ -45,12 +57,13 @@ public class WashController {
 
 
     @PostMapping("/pay-wash/{id}")
-    public void payWash(@PathVariable Integer id) {
-        washService.payWashSevice(id);
+    public ResponseEntity<Wash> payWash(@PathVariable Integer id) {
+        return new ResponseEntity<>(washService.payWashSevice(id), HttpStatus.OK);
     }
 
     @PostMapping("/retire/{id}")
-    public void retire(@PathVariable Integer id) {
-        washService.retireVehicle(id);
+    public ResponseEntity<Wash> retire(@PathVariable Integer id) {
+        return new ResponseEntity<>(washService.retireVehicle(id), HttpStatus.OK);
     }
+
 }

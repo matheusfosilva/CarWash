@@ -2,8 +2,11 @@ package br.com.lavajato.doisirmaos.Controllers;
 
 import br.com.lavajato.doisirmaos.Domain.User;
 import br.com.lavajato.doisirmaos.Services.UserService;
+import br.com.lavajato.doisirmaos.Dto.UserDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,23 +19,23 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody UserDto user) {
+        return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Integer id) {
-        return userService.getUser(id);
+    public ResponseEntity<User> getUser(@PathVariable Integer id) {
+        return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<>( userService.getAllUsers(), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
-        return userService.updateUser(id, updatedUser);
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody UserDto updatedUser) {
+        return new ResponseEntity<>(userService.updateUser(id, updatedUser), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

@@ -1,7 +1,10 @@
 package br.com.lavajato.doisirmaos.Domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,13 +21,12 @@ import java.time.LocalDateTime;
 public class Wash {
 
     @Id
-    private Long id;
-    @OneToOne
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @ManyToOne
     private Vehicle vehicle;
     private Double price;
-    @OneToOne
-    private User owner;
-    @OneToOne
+    @ManyToOne
     private CarWash carWash;
     private LocalDateTime startingTime;
     private LocalDateTime finishTime;

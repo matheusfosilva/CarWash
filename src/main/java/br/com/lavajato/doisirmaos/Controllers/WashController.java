@@ -46,7 +46,7 @@ public class WashController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Wash> updatePrice(@PathVariable Integer id, WashDto dto) {
+    public ResponseEntity<Wash> updatePrice(@PathVariable Integer id, @RequestBody WashDto dto) {
         return new ResponseEntity<>(washService.updatePrice(id, dto), HttpStatus.OK);
     }
 
